@@ -1,12 +1,15 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/RenatoHioji/simple-go-api/src/controller/user"
+	"github.com/gin-gonic/gin"
+)
 
 func InitRoutes(r *gin.RouterGroup) {
 
-	r.GET("/getUserById/:userId", func(c *gin.Context) {})
-	r.GET("/getUserByEmail/:userEmail")
-	r.POST("/user/")
-	r.PUT("/user/:userId")
-	r.DELETE("/user/:userId")
+	r.GET("/getUserById/:userId", user.FindUserById)
+	r.GET("/getUserByEmail/:userEmail", user.FindUserByEmail)
+	r.POST("/user/", user.CreateUser)
+	r.PUT("/user/:userId", user.UpdateUser)
+	r.DELETE("/user/:userId", user.DeleteUser)
 }
