@@ -7,7 +7,7 @@ import (
 	"github.com/RenatoHioji/simple-go-api/src/configuration/validation"
 	"github.com/RenatoHioji/simple-go-api/src/controller/user/requests"
 	"github.com/RenatoHioji/simple-go-api/src/model"
-	"github.com/RenatoHioji/simple-go-api/src/model/service"
+	"github.com/RenatoHioji/simple-go-api/src/view"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -16,7 +16,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	var user_request requests.UserRequest
 
 	logger.Info("init", zap.String("journey", "create_user"))
@@ -28,15 +28,13 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	service := service.NewUserDomainService()
-
 	domain := model.NewUserDomain(user_request.Email, user_request.Password, user_request.Username, user_request.Age)
 
-	if err := service.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 	}
 
 	logger.Info("Sucessful creating user", zap.String("journey", "create_user"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
 }
