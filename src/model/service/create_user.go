@@ -1,19 +1,21 @@
-package model
+package service
 
 import (
 	"fmt"
 
 	"github.com/RenatoHioji/simple-go-api/src/configuration/logger"
 	"github.com/RenatoHioji/simple-go-api/src/configuration/rest_err"
+	"github.com/RenatoHioji/simple-go-api/src/model"
 	"go.uber.org/zap"
 )
 
-func (ud *UserDomain) CreateUser() *rest_err.RestErr {
+func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) *rest_err.RestErr {
+
 	logger.Info("Init creating user", zap.String("journey", "create_user"))
 
-	ud.EncryptPassword()
+	userDomain.EncryptPassword()
 
-	fmt.Println(ud)
+	fmt.Println(userDomain)
 
 	return nil
 }

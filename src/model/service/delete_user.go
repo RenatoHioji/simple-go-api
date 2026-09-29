@@ -1,4 +1,4 @@
-package model
+package service
 
 import (
 	"github.com/RenatoHioji/simple-go-api/src/configuration/logger"
@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func (*UserDomain) DeleteUser(string) *rest_err.RestErr {
+func (*userDomainService) DeleteUser(string) *rest_err.RestErr {
 	logger.Info("Init deleting user", zap.String("journey", "delete_user"))
 
 	return nil

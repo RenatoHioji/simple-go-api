@@ -7,6 +7,7 @@ import (
 	"github.com/RenatoHioji/simple-go-api/src/configuration/validation"
 	"github.com/RenatoHioji/simple-go-api/src/controller/user/requests"
 	"github.com/RenatoHioji/simple-go-api/src/model"
+	"github.com/RenatoHioji/simple-go-api/src/model/service"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -27,9 +28,11 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
+	service := service.NewUserDomainService()
+
 	domain := model.NewUserDomain(user_request.Email, user_request.Password, user_request.Username, user_request.Age)
 
-	if err := domain.CreateUser(); err != nil {
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 	}
 
