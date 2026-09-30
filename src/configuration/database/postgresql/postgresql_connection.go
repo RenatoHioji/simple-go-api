@@ -7,16 +7,19 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func InitPostgresql() *pgx.Conn {
-	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
+var (
+	USER_DATABASE_URL = "USER_DATABASE_URL"
+)
+
+func NewPostgresqlConnection(ctx context.Context) (*pgx.Conn, error) {
+	conn, err := pgx.Connect(ctx, os.Getenv(USER_DATABASE_URL))
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	if err := conn.Ping(context.Background()); err != nil {
-		panic(err)
+	if err := conn.Ping(ctx); err != nil {
+		return nil, err
 	}
-
-	return conn
+	return conn, nil
 }

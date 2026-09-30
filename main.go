@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/RenatoHioji/simple-go-api/src/configuration/database/postgresql"
 	"github.com/RenatoHioji/simple-go-api/src/controller/routes"
 	"github.com/RenatoHioji/simple-go-api/src/controller/user"
 	"github.com/RenatoHioji/simple-go-api/src/model/service"
@@ -17,8 +16,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	postgresql.InitPostgresql()
 
 	user_service := service.NewUserDomainService()
 	user_controller := user.NewUserControllerInterface(user_service)
