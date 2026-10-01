@@ -1,4 +1,4 @@
-package user
+package controller
 
 import (
 	"github.com/RenatoHioji/simple-go-api/src/model/service"

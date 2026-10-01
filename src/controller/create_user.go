@@ -1,11 +1,11 @@
-package user
+package controller
 
 import (
 	"net/http"
 
 	"github.com/RenatoHioji/simple-go-api/src/configuration/logger"
 	"github.com/RenatoHioji/simple-go-api/src/configuration/validation"
-	"github.com/RenatoHioji/simple-go-api/src/controller/user/requests"
+	"github.com/RenatoHioji/simple-go-api/src/controller/requests"
 	"github.com/RenatoHioji/simple-go-api/src/model"
 	"github.com/RenatoHioji/simple-go-api/src/view"
 	"github.com/gin-gonic/gin"

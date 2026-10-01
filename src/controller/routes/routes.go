@@ -1,11 +1,11 @@
 package routes
 
 import (
-	"github.com/RenatoHioji/simple-go-api/src/controller/user"
+	"github.com/RenatoHioji/simple-go-api/src/controller"
 	"github.com/gin-gonic/gin"
 )
 
-func InitRoutes(r *gin.RouterGroup, user_controller user.UserControllerInterface) {
+func InitRoutes(r *gin.RouterGroup, user_controller controller.UserControllerInterface) {
 
 	r.GET("/getUserById/:userId", user_controller.FindUserById)
 	r.GET("/getUserByEmail/:userEmail", user_controller.FindUserByEmail)
