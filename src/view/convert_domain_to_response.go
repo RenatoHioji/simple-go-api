@@ -1,7 +1,7 @@
 package view
 
 import (
-	"github.com/RenatoHioji/simple-go-api/src/controller/user/response"
+	"github.com/RenatoHioji/simple-go-api/src/controller/response"
 	"github.com/RenatoHioji/simple-go-api/src/model"
 )
 

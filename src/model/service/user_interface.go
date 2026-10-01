@@ -3,13 +3,15 @@ package service
 import (
 	"github.com/RenatoHioji/simple-go-api/src/configuration/rest_err"
 	"github.com/RenatoHioji/simple-go-api/src/model"
+	"github.com/RenatoHioji/simple-go-api/src/repository"
 )
 
-func NewUserDomainService() UserDomainService {
-	return &userDomainService{}
+func NewUserDomainService(user_repository repository.UserRepository) UserDomainService {
+	return &userDomainService{user_repository: user_repository}
 }
 
 type userDomainService struct {
+	user_repository repository.UserRepository
 }
 
 type UserDomainService interface {

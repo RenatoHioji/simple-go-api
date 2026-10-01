@@ -15,6 +15,10 @@ func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) *r
 
 	userDomain.EncryptPassword()
 
+	if _, err := ud.user_repository.CreateUser(userDomain); err != nil {
+		return err
+	}
+
 	fmt.Println(userDomain)
 
 	return nil
