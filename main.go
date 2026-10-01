@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 
+	"github.com/RenatoHioji/simple-go-api/src/configuration/database/postgresql"
 	"github.com/RenatoHioji/simple-go-api/src/controller/routes"
-	"github.com/RenatoHioji/simple-go-api/src/controller/user"
-	"github.com/RenatoHioji/simple-go-api/src/model/service"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -17,9 +17,13 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	user_service := service.NewUserDomainService()
-	user_controller := user.NewUserControllerInterface(user_service)
+	pool, err := postgresql.NewPostgresqlConnection(context.Background())
 
+	if err != nil {
+		log.Fatal("Error trying to connect to db", err)
+	}
+
+	user_controller := initDependencies(pool)
 	router := gin.Default()
 
 	routes.InitRoutes(&router.RouterGroup, user_controller)
